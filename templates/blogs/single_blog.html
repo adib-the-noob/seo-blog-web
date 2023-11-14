@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ blog.title }}</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .blog-container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .blog-thumbnail {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 4px 4px 0 0;
+        }
+
+        .blog-content {
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .blog-body {
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .author-info {
+            color: #888;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="blog-container">
+        <img src="{{ blog.thumbnail.url }}" alt="image" class="blog-thumbnail">
+        <div class="blog-content">
+            <h1>{{ blog.title }}</h1>
+            <p class="blog-body">{{ blog.body }}</p>
+            <p class="author-info">
+                Author: {{ blog.author.name }} &lt;{{ blog.author.email }}&gt;
+            </p>
+        </div>
+    </div>
+</body>
+</html>

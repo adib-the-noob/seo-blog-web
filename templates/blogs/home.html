@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogs</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+        }
+
+        .blog-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            overflow: hidden;
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .blog-card:hover {
+            transform: scale(1.05);
+        }
+
+        .blog-thumbnail {
+            width: 100%;
+            max-height: 150px; /* Adjust the max-height as needed */
+            object-fit: cover;
+            border-radius: 4px 4px 0 0;
+        }
+
+        .blog-content {
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .blog-body {
+            color: #555;
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .read-more {
+            color: #007BFF;
+            cursor: pointer;
+        }
+
+        .author-info {
+            color: #888;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% for blog in blogs %}
+            <div class="blog-card">
+                <img src="{{ blog.thumbnail.url }}" alt="image" class="blog-thumbnail">
+                <div class="blog-content">
+                    <h2>{{ blog.title }}</h2>
+                    <p class="blog-body">{{ blog.body }}</p>
+                    <p class="read-more" onclick="toggleDescription(this)">See More</p>
+                    <div class="author-info">
+                        Author: {{ blog.author.name }} &lt;{{ blog.author.email }}&gt;
+                    </div>
+                    <a href="{% url 'blog_detail' blog_id=blog.id %}">Read more</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        function toggleDescription(element) {
+            const blogContent = element.previousSibling;
+            blogContent.classList.toggle('expanded');
+            element.textContent = blogContent.classList.contains('expanded') ? 'See Less' : 'See More';
+        }
+    </script>
+</body>
+</html>
